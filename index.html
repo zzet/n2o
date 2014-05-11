@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="N2O : N2O Erlang Web Framework on WebSockets" />
+    <meta name="description" content="N2O : Erlang WebSocket Application Server" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/5HT/n2o">View on GitHub</a>
 
           <h1 id="project_title">N2O</h1>
-          <h2 id="project_tagline">N2O Erlang Web Framework on WebSockets</h2>
+          <h2 id="project_tagline">Erlang WebSocket Application Server</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/5HT/n2o/zipball/master">Download this project as a .zip file</a>
@@ -31,36 +31,40 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>N2O: Erlang Web Framework on WebSockets</h1>
+        <h1>
+<a name="n2o-erlang-web-framework" class="anchor" href="#n2o-erlang-web-framework"><span class="octicon octicon-link"></span></a>N2O: Erlang Web Framework</h1>
 
-<h2>Nitrogen 2x Optimized</h2>
+<h2>
+<a name="nitrogen-2x-optimized" class="anchor" href="#nitrogen-2x-optimized"><span class="octicon octicon-link"></span></a>Nitrogen 2x Optimized</h2>
 
 <p>Information for Nitrogen users:</p>
 
 <ul>
 <li>All actions are triggered through single endpoint</li>
 <li>Dropped support of simple_brigde</li>
-<li>Dependency on Bert, jQuery and Bullet only</li>
-<li>no JSON encoding for client/server data transfer, no use of urlencode and Nitrogen.js</li>
-<li>Enough compatibility with original Nitrogen to convert Nitrogen sites/elements to N2O</li>
+<li>Dependency on Micro BERT and optional XHR fallback only, no jQuery</li>
+<li>BERT/MessagePack inside JSON and raw binaries</li>
+<li>Enough compatibility with original Nitrogen to convert sites/elements to N2O</li>
 <li>Proper id and class attributes</li>
 <li>Several times faster that original Nitrogen</li>
 <li>GProc process registry instead of nprocreg</li>
-</ul><h2>New features</h2>
+<li>Much faster ETS Session Handler</li>
+</ul><h2>
+<a name="new-features" class="anchor" href="#new-features"><span class="octicon octicon-link"></span></a>New features</h2>
 
 <ul>
-<li>Twitter Bootstrap compatible rendering</li>
+<li>Secure Pickling with AES CBC 128 for events protection</li>
 <li>Optimized for latency: deffered JavaScript rendering</li>
-<li>Supports optional Zepto library for non-IE browsers</li>
 <li>XHR fallback through Bullet for legacy browsers</li>
 <li>Clean codebase without additional layers</li>
 <li>One process per page during lifetime</li>
 <li>Works heavy coupled within Cowboy processes</li>
 <li>Page construction from Erlang binaries</li>
-<li>Custom template engines as elements: DTL, SGTE, ET</li>
-<li>Advanced element collection: Tabs, Grid, Viz.js, Mandala</li>
+<li>Custom template engines as elements: #dtl</li>
+<li>Advanced element collection: #upload, #tags, #edit</li>
 <li>Rapid REST apps prototyping with REST handlers</li>
-</ul><h2>WebSockets transport</h2>
+</ul><h2>
+<a name="websockets-transport" class="anchor" href="#websockets-transport"><span class="octicon octicon-link"></span></a>WebSockets transport</h2>
 
 <p>N2O was started as the first Erlang Web Framework that fully relies on 
 WebSocket transport for client/server communication.
@@ -69,7 +73,8 @@ Such as binary page construction, binary data transfer, events trigger over WebS
 minumum process spawns, use of Cowboy processes to run N2O html rendering.
 N2O page rendering is several times faster than with the original Nitrogen.</p>
 
-<h2>Binary events over WebSockets</h2>
+<h2>
+<a name="binary-events-over-websockets" class="anchor" href="#binary-events-over-websockets"><span class="octicon octicon-link"></span></a>Binary events over WebSockets</h2>
 
 <p>N2O does not use JSON to encode data transfer between client/server. 
 Instead, all data communication is encoded with native 
@@ -78,7 +83,8 @@ Is it as simple as calling Bert.decode(msg) and this allows
 to avoid complexity on the server-side. 
 Please refer to <a href="http://bert-rpc.org">http://bert-rpc.org</a> for more information.</p>
 
-<h2>Optimized for speed</h2>
+<h2>
+<a name="optimized-for-speed" class="anchor" href="#optimized-for-speed"><span class="octicon octicon-link"></span></a>Optimized for speed</h2>
 
 <p>Original Nitrogen was tested in production under high-load and
 we decided to drop nprocreg process registry along with
@@ -86,7 +92,8 @@ action_comet process creation. N2O creates only a single
 process for async websocket handler, all async operations
 are handled within Cowboy processes.</p>
 
-<h2>Why Erlang in Web?</h2>
+<h2>
+<a name="why-erlang-in-web" class="anchor" href="#why-erlang-in-web"><span class="octicon octicon-link"></span></a>Why Erlang in Web?</h2>
 
 <p>We have measured the performance of most of the existing modern web frameworks
 created with functional languages and Cowboy is still the king. You can see
@@ -103,10 +110,11 @@ It is certanly faster than raw HTTP node.js performance!</p>
 
 <p>Reference to list of modern web frameworks: <a href="http://gist.github.com/5HT/5522302">http://gist.github.com/5HT/5522302</a></p>
 
-<h2>Desktop and Mobile Applications</h2>
+<h2>
+<a name="desktop-and-mobile-applications" class="anchor" href="#desktop-and-mobile-applications"><span class="octicon octicon-link"></span></a>Desktop and Mobile Applications</h2>
 
-<p>There is two approaches to design communications between client/server.
-The first is called data-on-wire, where only data transfers on channel through
+<p>There are two approaches to design communications between client/server.
+The first is called data-on-wire, where only data transfers on channel
 through RPC, REST in form of JSON, XML or Binary. All rendering in first
 type are being made on client side. This calls rich client and mostly
 fits for desktop. The examples are Chaplin/CoffeScript and Meteor/JavaScript.</p>
@@ -117,7 +125,7 @@ This approach better fits for mobile applications, where client doesn't
 have much resources.</p>
 
 <p>Using N2O you could create both types of applications: using N2O REST framework
-for first type of application based on Cowboy REST features alogn with
+for first type of application based on Cowboy REST features along with
 DTL templates for initial HTML renderings, and also Nitrogen DSL-based approach to model
 parts of the pages as widgets and control elements thanks
 to rich Nitrogen elements collections provided by Nitrogen community.</p>
@@ -127,7 +135,8 @@ N2O is the best choice that you could made for fast prototyping,
 simpicity of use, codebase maintanance, etc. Despite HTML tranfer over the wire,
 you will still have access to all your erlang services directly.</p>
 
-<h2>Templates vs DSL</h2>
+<h2>
+<a name="templates-vs-dsl" class="anchor" href="#templates-vs-dsl"><span class="octicon octicon-link"></span></a>Templates vs DSL</h2>
 
 <p>We liked Nitrogen for simple and elegant way of typed HTML
 page construction with DSL base on host language similar to
@@ -161,7 +170,8 @@ body() -&gt; %% area of http handler
     #textbox { id=userName, text= &lt;&lt;"Anonymous"&gt;&gt; },
     #panel { id=chatHistory, class=chat_history },
     #textbox { id=message },
-    #button { id=sendButton, text= &lt;&lt;"Send"&gt;&gt;, postback={chat,Pid}, source=[userName,message] },
+    #button { id=sendButton, text= &lt;&lt;"Send"&gt;&gt;,
+              postback={chat,Pid}, source=[userName,message] },
     #panel { id=status } ].
 
 event({chat,Pid}) -&gt; %% area of websocket handler
@@ -169,7 +179,6 @@ event({chat,Pid}) -&gt; %% area of websocket handler
     Message = wf:q(message),
     Terms = [ #span { text="Message sent" }, #br{} ],
     wf:insert_bottom(chatHistory, Terms),
-    wf:wire("$('#message').focus(); $('#message').select(); "),
     wf:reg(room),
     Pid ! {message, Username, Message};
 
@@ -181,7 +190,6 @@ chat_loop() -&gt; %% background worker ala comet
             Terms = [ #span { text=Username }, ": ",
                       #span { text=Message }, #br{} ],
             wf:insert_bottom(chatHistory, Terms),
-            wf:wire("$('#chatHistory').scrollTop = $('#chatHistory').scrollHeight;"),
             wf:flush(room); %% we flush to websocket process by key
         Unknown -&gt; error_logger:info_msg("Unknown Looper Message ~p",[Unknown])
     end,
@@ -191,9 +199,10 @@ chat_loop() -&gt; %% background worker ala comet
 <p>And try to compare how this functionality would be implemented
 with your favourite language/framework.</p>
 
-<h2>Clean codebase</h2>
+<h2>
+<a name="clean-codebase" class="anchor" href="#clean-codebase"><span class="octicon octicon-link"></span></a>Clean codebase</h2>
 
-<p>We feel free to brake some of the compatability with the original Nitrogen project,
+<p>We feel free to break some of the compatability with the original Nitrogen project,
 mostly because we want to have a clean codebase and fastest speed.
 However, it is still possible to easily port Nitrogen web sites to N2O.
 E.g. N2O returns id and class semantics of HTML and not html_id.
@@ -210,7 +219,8 @@ to develop application on erlang.</p>
                               xforms: Bert.binary('undefined')}));});&lt;/script&gt;
 </code></pre>
 
-<h2>Reduced Latency</h2>
+<h2>
+<a name="reduced-latency" class="anchor" href="#reduced-latency"><span class="octicon octicon-link"></span></a>Reduced Latency</h2>
 
 <p>The secret of reduced latency is simple. We try to deliver rendered HTML as soon as
 possible and render JavaScript only after WebSocket initialization. We use thre steps
@@ -234,7 +244,8 @@ WebSocket handler stay alone. Thus initial phase done.</p>
 <p>After that through WebSocket channel all event comes from browser to server and
 handler by N2O, who renders elements to HTML and actions to JavaScript.</p>
 
-<h2>Performance</h2>
+<h2>
+<a name="performance" class="anchor" href="#performance"><span class="octicon octicon-link"></span></a>Performance</h2>
 
 <p>We are using for measurement ab, httperf, wrk and siege, all of them. The most valuable storm
 created by wrk and it is not achieved in real apps but could show us the internal throughput
@@ -242,12 +253,13 @@ of individual components. The most near to real life apps is siege who also make
 for each request. So this data shows internal data throughput by wrk:</p>
 
 <table>
-<tr>
+<thead><tr>
 <th>Framework</th>
 <th>Enabled Components</th>
 <th>Speed</th>
 <th>Timeouts</th>
-</tr>
+</tr></thead>
+<tbody>
 <tr>
 <td>PHP5 FCGI</td>
 <td>Simple script with two &lt;?php print "OK"; ?&gt; terms inside</td>
@@ -278,31 +290,43 @@ for each request. So this data shows internal data throughput by wrk:</p>
 <td>15K</td>
 <td>no</td>
 </tr>
-</table><h2>Prerequisites</h2>
+</tbody>
+</table><h2>
+<a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
 
 <p>To run N2O sites you need Erlang R15 or higher and basho rebar installed.
 N2O works on Windows, Mac and Linux. </p>
 
 <p>NOTE: the work of sync application on Windows is limited.</p>
 
-<h2>Kickstart Bootstrap</h2>
+<pre><code>$ sudo apt-get install build-essential libncurses5-dev openssl libssl-dev m4
+$ curl -O https://github.com/spawngrid/kerl/blob/master/kerl
+$ chmod a+x kerl
+$ echo KERL_CONFIGURE_OPTIONS="--enable-threads --enable-smp-support \
+       --enable-m64-build --without-javac --enable-kernel-poll" &gt; ~/.kerlrc
+$ kerl update releases
+$ kerl build R16B01 r16b01
+$ kerl install r16b01 /usr/lib/erlang
+$ . /usr/lib/erlang/activate
+</code></pre>
+
+<h2>
+<a name="kickstart-bootstrap" class="anchor" href="#kickstart-bootstrap"><span class="octicon octicon-link"></span></a>Kickstart Bootstrap</h2>
 
 <p>To try N2O you just need to clone a N2O repo from Github and build. We don’t use fancy
 scripts so building process is OTP compatible: bootstrap site is bundled as Erlang release.</p>
 
-<pre><code>$ cd samples
-$ rebar get-deps
-$ rebar compile
-$ cd rels/web &amp;&amp; rebar -f generate
-$ node/bin/node console
+<pre><code>$ cd n2o/samples
+$ make &amp;&amp; make console
 </code></pre>
 
 <p>Now you can try: <a href="http://localhost:8000">http://localhost:8000</a></p>
 
-<h2>Start yourself depending N2O core</h2>
+<h2>
+<a name="start-yourself-depending-n2o-core" class="anchor" href="#start-yourself-depending-n2o-core"><span class="octicon octicon-link"></span></a>Start yourself depending N2O core</h2>
 
 <p>If you want dependency on the raw N2O core you should define
-N2O http and websocket cowboy handlers and cowboy static handler as
+N2O http and websocket (ws endpoint) cowboy handlers and cowboy static handler as
 Cowboy dispatch parameter:</p>
 
 <pre><code>cowboy:start_http(http, 100, [{port, 8000}],
@@ -312,9 +336,10 @@ Cowboy dispatch parameter:</p>
 dispatch_rules() -&gt;
     cowboy_router:compile(
        [{'_', [
-            {["/static/[...]"], cowboy_static, [{directory, {priv_dir, ?APP, [&lt;&lt;"static"&gt;&gt;]}},
-                    {mimetypes, {fun mimetypes:path_to_mimes/2, default}}]},
-            {["/websocket/[...]"], n2o_websocket, []},
+            {["/static/[...]"], cowboy_static,
+                [{directory, {priv_dir, ?APP, [&lt;&lt;"static"&gt;&gt;]}},
+                 {mimetypes, {fun mimetypes:path_to_mimes/2, default}}]},
+            {"/ws/[...]", bullet_handler, [{handler, n2o_bullet}]},
             {'_', n2o_cowboy, []}
     ]}]).
 </code></pre>
@@ -328,7 +353,8 @@ dispatch_rules() -&gt;
 main() -&gt; [ #span{text = &lt;&lt;"Hello"&gt;&gt;} ].
 </code></pre>
 
-<h2>Developer scripts for Sync</h2>
+<h2>
+<a name="developer-scripts-for-sync" class="anchor" href="#developer-scripts-for-sync"><span class="octicon octicon-link"></span></a>Developer scripts for Sync</h2>
 
 <p>For developing we use some scripts which are needed for linking source
 directories with release lib directories and also links to BERT, N2O
@@ -341,14 +367,25 @@ $ ./release_sync.sh
 <p>Now you can edit site sources and sync will automaticaly recompile
 and reload modules in release.</p>
 
-<h2>Credits</h2>
+<h2>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h2>
 
 <ul>
-<li>Maxim Sokhatsky</li>
-<li>Andrii Zadorozhnii</li>
-<li>Roman Shestakov</li>
-<li>Jesse Gumm</li>
-<li>Rusty Klophaus</li>
+<li>IRC Channel #n2o on FreeNode 24/7</li>
+<li>Official N2O Book <a href="http://synrc.com/framework/web/">HTML</a> and <a href="http://synrc.com/framework/web/n2o/doc/book.pdf">PDF</a>
+</li>
+</ul><h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>Maxim Sokhatsky -- core, shen</li>
+<li>Dmitry Bushmelev -- endpoints, yaws, cowboy</li>
+<li>Andrii Zadorozhnii -- elements, actions, handlers</li>
+<li>Anton Logvinenko -- doc</li>
+<li>Vladimir Kirillov -- mac, bsd, xen, linux support</li>
+<li>Roman Shestakov -- advanced elements, ct</li>
+<li>Jesse Gumm -- nitrogen, help</li>
+<li>Rusty Klophaus -- original author</li>
 </ul><p>OM A HUM</p>
       </section>
     </div>
