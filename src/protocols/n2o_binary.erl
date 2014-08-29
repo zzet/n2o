@@ -1,6 +1,7 @@
 -module(n2o_binary).
 -author('Andrew Martemianov').
 -include_lib("n2o/include/wf.hrl").
+-compile(export_all).
 
 info({binary,Message}, Req, State) -> info(binary_to_term(Message,[safe]),Req,State);
 
@@ -23,6 +24,6 @@ info({binary,Message}, Req, State) ->
                   MetaSize:32,Meta/binary,Data/binary>>;
         _ when is_binary(Term) -> Term;
         _ -> term_to_binary(Term) end,
-    {reply,{binary,Res},Req,State}.
+    {reply,{binary,Res},Req,State};
 
 info(Message, Req, State) -> {unknown,Message, Req, State}.
